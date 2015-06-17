@@ -8,11 +8,15 @@ CORE_PROJECT=$(FLAGSDIR)/$(CORE_PATH)
 JINJA2_PATH=jinja2
 JINJA2_PROJECT=$(FLAGSDIR)/$(JINJA2_PATH)
 
+# haml
+HAML_PATH=haml
+HAML_PROJECT=$(FLAGSDIR)/$(HAML_PATH)
+
 # example
 EXAMPLE_PATH=example
 EXAMPLE_PROJECT=$(FLAGSDIR)/$(EXAMPLE_PATH)
 
-PROJECTS=$(CORE_PROJECT) $(JINJA2_PROJECT) $(EXAMPLE_PROJECT)
+PROJECTS=$(CORE_PROJECT) $(JINJA2_PROJECT) $(EXAMPLE_PROJECT) $(HAML_PROJECT)
 UPDATE=$(FLAGSDIR)/update
 
 # virtualenv
@@ -37,6 +41,10 @@ $(JINJA2_PROJECT): $(JINJA2_PATH)/setup.py venv_impaf
 $(EXAMPLE_PROJECT): $(EXAMPLE_PATH)/setup.py venv_impaf
 	$(ACTIVATE) && cd $(EXAMPLE_PATH) && python setup.py develop
 	@touch $(EXAMPLE_PROJECT)
+
+$(HAML_PROJECT): $(HAML_PATH)/setup.py venv_impaf
+	$(ACTIVATE) && cd $(HAML_PATH) && python setup.py develop
+	@touch $(HAML_PROJECT)
 
 venv_impaf:
 	virtualenv $@

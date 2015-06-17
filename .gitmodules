@@ -7,3 +7,6 @@
 [submodule "example"]
 	path = example
 	url = git@github.com:socek/impex.git
+[submodule "haml"]
+	path = haml
+	url = git@github.com:socek/impaf-haml.git
