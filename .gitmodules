@@ -10,3 +10,6 @@
 [submodule "haml"]
 	path = haml
 	url = git@github.com:socek/impaf-haml.git
+[submodule "beaker"]
+	path = beaker
+	url = git@github.com:socek/impaf-beaker.git
