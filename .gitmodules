@@ -4,3 +4,6 @@
 [submodule "jinja2"]
 	path = jinja2
 	url = git@github.com:socek/impaf-jinja2.git
+[submodule "example"]
+	path = example
+	url = git@github.com:socek/impex.git
