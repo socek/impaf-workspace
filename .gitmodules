@@ -13,3 +13,6 @@
 [submodule "beaker"]
 	path = beaker
 	url = git@github.com:socek/impaf-beaker.git
+[submodule "sqlalchemy"]
+	path = sqlalchemy
+	url = git@github.com:socek/impaf-sqlalchemy.git
