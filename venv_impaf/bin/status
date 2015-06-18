@@ -1,0 +1,14 @@
+#!/bin/bash
+me=`which $0`
+cd `dirname $me`/../../
+ls -d */ | while read LD; do
+    pushd $LD &> /dev/null
+    if [ -e ".git" ] ; then
+        echo -en "* "
+        echo ${PWD##*/}
+        git s
+    fi
+    popd &> /dev/null
+done
+echo "* THIS"
+git s
