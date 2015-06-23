@@ -57,3 +57,6 @@ $(SQLALCHEMY_PROJECT): $(SQLALCHEMY_PATH)/setup.py venv_impaf
 venv_impaf:
 	virtualenv $@
 	mkdir $(FLAGSDIR)
+
+serve:
+	cd example && pserve frontend.ini --reload
