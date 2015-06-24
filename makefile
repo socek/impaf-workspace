@@ -16,11 +16,15 @@ HAML_PROJECT=$(FLAGSDIR)/$(HAML_PATH)
 SQLALCHEMY_PATH=sqlalchemy
 SQLALCHEMY_PROJECT=$(FLAGSDIR)/$(SQLALCHEMY_PATH)
 
+# alembic
+ALEMBIC_PATH=alembic
+ALEMBIC_PROJECT=$(FLAGSDIR)/$(ALEMBIC_PATH)
+
 # example
 EXAMPLE_PATH=example
 EXAMPLE_PROJECT=$(FLAGSDIR)/$(EXAMPLE_PATH)
 
-PROJECTS=$(CORE_PROJECT) $(JINJA2_PROJECT) $(EXAMPLE_PROJECT) $(HAML_PROJECT) $(SQLALCHEMY_PROJECT)
+PROJECTS=$(CORE_PROJECT) $(JINJA2_PROJECT) $(HAML_PROJECT) $(SQLALCHEMY_PROJECT) $(ALEMBIC_PROJECT) $(EXAMPLE_PROJECT)
 UPDATE=$(FLAGSDIR)/update
 
 # virtualenv
@@ -54,9 +58,13 @@ $(SQLALCHEMY_PROJECT): $(SQLALCHEMY_PATH)/setup.py venv_impaf
 	$(ACTIVATE) && cd $(SQLALCHEMY_PATH) && python setup.py develop
 	@touch $(SQLALCHEMY_PROJECT)
 
+$(ALEMBIC_PROJECT): $(ALEMBIC_PATH)/setup.py venv_impaf
+	$(ACTIVATE) && cd $(ALEMBIC_PATH) && python setup.py develop
+	@touch $(ALEMBIC_PROJECT)
+
 venv_impaf:
 	virtualenv $@
-	mkdir $(FLAGSDIR)
+	mkdir -p $(FLAGSDIR)
 
-serve:
+serve: $(UPDATE) $(PROJECTS)
 	cd example && pserve frontend.ini --reload

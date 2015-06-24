@@ -16,3 +16,6 @@
 [submodule "sqlalchemy"]
 	path = sqlalchemy
 	url = git@github.com:socek/impaf-sqlalchemy.git
+[submodule "alembic"]
+	path = alembic
+	url = git@github.com:socek/impaf-alembic.git
