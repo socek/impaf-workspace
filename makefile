@@ -76,3 +76,6 @@ venv_impaf:
 
 serve: $(UPDATE) $(PROJECTS)
 	cd example && pserve frontend.ini --reload
+
+test: $(UPDATE) $(PROJECTS)
+	py.test --cov impaf --cov implugin --cov impex
