@@ -19,3 +19,6 @@
 [submodule "alembic"]
 	path = alembic
 	url = git@github.com:socek/impaf-alembic.git
+[submodule "fanstatic"]
+	path = fanstatic
+	url = git@github.com:socek/impaf-fanstatic.git
