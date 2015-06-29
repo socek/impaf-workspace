@@ -24,3 +24,9 @@ zwróci nam dekorator, a nie konkretną metodę.
 ========================
 
 Czyli jak zrobić konstruktor kopiujący z pomocą .__dict__
+
+6. Konfiguracja == wysoki próg wejścia
+======================================
+
+Aby skonfigurować całość, trzeba wiedzieć jak to działa od początku do końca.
+Example hello world?
