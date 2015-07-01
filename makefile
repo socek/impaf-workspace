@@ -75,7 +75,7 @@ venv_impaf:
 	mkdir -p $(FLAGSDIR)
 
 serve: $(UPDATE) $(PROJECTS)
-	cd example && pserve frontend.ini --reload
+	$(ACTIVATE) && cd example && pserve frontend.ini --reload
 
 test: $(UPDATE) $(PROJECTS)
-	py.test --cov impaf --cov implugin --cov impex --cov haml --cov sqlalchemy --cov fanstatic --cov alembic
+	$(ACTIVATE) && py.test --cov impaf --cov implugin --cov impex --cov haml --cov sqlalchemy --cov fanstatic --cov alembic
