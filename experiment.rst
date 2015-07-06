@@ -30,3 +30,18 @@ Czyli jak zrobić konstruktor kopiujący z pomocą .__dict__
 
 Aby skonfigurować całość, trzeba wiedzieć jak to działa od początku do końca.
 Example hello world?
+
+7. Dodawanie nowych pluginów
+============================
+Kiedy dodajesz nowy plugin, który ma w zależnościach jakiś Twój plugin, to
+trzeba zmienić dziedziczenie, bo wyjdzie błąd MRO.
+
+8. Dziedziczenie słowników
+==========================
+
+Tak aby słownik był per klasa, a nie instancja.
+
+9. Testy -> dziedziczenie fixtur
+================================
+
+Zawsze obiekt testowany powinien mieć 1 konkretną nazwę

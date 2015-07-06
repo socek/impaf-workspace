@@ -22,3 +22,6 @@
 [submodule "fanstatic"]
 	path = fanstatic
 	url = git@github.com:socek/impaf-fanstatic.git
+[submodule "formskit"]
+	path = formskit
+	url = git@github.com:socek/impaf-formskit.git
