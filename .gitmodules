@@ -25,3 +25,6 @@
 [submodule "formskit"]
 	path = formskit
 	url = git@github.com:socek/impaf-formskit.git
+[submodule "flashmsg"]
+	path = flashmsg
+	url = git@github.com:socek/impaf-flashmsg.git
