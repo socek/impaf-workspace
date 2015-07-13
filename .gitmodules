@@ -28,3 +28,6 @@
 [submodule "flashmsg"]
 	path = flashmsg
 	url = git@github.com:socek/impaf-flashmsg.git
+[submodule "auth"]
+	path = auth
+	url = git@github.com:socek/impaf-auth.git
