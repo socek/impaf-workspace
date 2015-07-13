@@ -45,3 +45,9 @@ Tak aby słownik był per klasa, a nie instancja.
 ================================
 
 Zawsze obiekt testowany powinien mieć 1 konkretną nazwę
+
+10. Krzywa uczenia się
+======================
+
+Przy tworzeniu nowych klas (np. kontrolerów) trzeba znać wszystkie klasy w
+projekcie, aby dobrze ich użyć.
