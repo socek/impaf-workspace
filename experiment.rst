@@ -51,3 +51,8 @@ Zawsze obiekt testowany powinien mieć 1 konkretną nazwę
 
 Przy tworzeniu nowych klas (np. kontrolerów) trzeba znać wszystkie klasy w
 projekcie, aby dobrze ich użyć.
+
+11. Problem namespace'u.
+========================
+
+Trzeba uważać, aby się nie zakleszczyć. Ale tylko przy applikacji.
