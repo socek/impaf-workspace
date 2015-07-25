@@ -102,4 +102,4 @@ serve: $(UPDATE) $(PROJECTS)
 	$(ACTIVATE) && cd example && pserve frontend.ini --reload
 
 test: $(UPDATE) $(PROJECTS)
-	$(ACTIVATE) && py.test --cov impaf --cov implugin --cov impex --cov alembic --cov auth --cov beaker --cov fanstatic --cov flashmsg --cov formskit --cov haml --cov jinja2 --cov sqlalchemy
+	$(ACTIVATE) && py.test
