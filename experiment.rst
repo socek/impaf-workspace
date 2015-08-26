@@ -16,7 +16,6 @@ Tutaj zamiast "return as html" można po prostu można odpowiednio dziedziczyć.
 
 4. super jako dekorator
 =======================
-
 Tutaj niestety pomysł się nie sprawdził, gdyż super() dla rodzica z użytym dekoratorem
 zwróci nam dekorator, a nie konkretną metodę.
 
@@ -43,7 +42,6 @@ Tak aby słownik był per klasa, a nie instancja.
 
 9. Testy -> dziedziczenie fixtur
 ================================
-
 Zawsze obiekt testowany powinien mieć 1 konkretną nazwę
 
 10. Krzywa uczenia się
@@ -54,5 +52,12 @@ projekcie, aby dobrze ich użyć.
 
 11. Problem namespace'u.
 ========================
-
 Trzeba uważać, aby się nie zakleszczyć. Ale tylko przy applikacji.
+
+12. Mixings vs world
+====================
+pass
+
+13. Kiedy trzeba użyć super() a kiedy nie?
+==========================================
+pass
