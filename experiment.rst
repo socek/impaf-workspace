@@ -61,3 +61,7 @@ pass
 13. Kiedy trzeba użyć super() a kiedy nie?
 ==========================================
 pass
+
+14. A co, jeśli byśmy chcięli wziąć 1 metodę z jednej klasy, a drugą metodę z innej klasy.
+==========================================================================================
+pass

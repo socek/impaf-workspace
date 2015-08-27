@@ -4,6 +4,7 @@ from glob import glob
 from os import path
 # from pprint import pprint
 from importlib import import_module
+from inspect import getmro
 
 
 class DataExcept(Exception):
@@ -54,6 +55,10 @@ class Converter(object):
             return False
 
     def run(self):
+        module_dotted = self.find_module()
+        if module_dotted:
+            module = import_module(module_dotted)
+
         with open(self.filename, 'r') as file:
             for match in self.RE_CLASS.findall(file.read()):
                 child = match[0]
@@ -61,31 +66,33 @@ class Converter(object):
                     parent.strip()
                     for parent in match[1].split(',') if parent.strip()
                 ]
-                self.classes[child] = {
+                data = {
                     'parents': parents,
                     'fullparents': [],
                     'name': child,
                 }
+                fullname = None
+                if module_dotted:
+                    cls = getattr(module, child)
+                    fullname = cls.__module__ + '.' + cls.__name__
+                    data['fullname'] = fullname
+                    data['mro'] = [
+                        mcls.__module__ + '.' + mcls.__name__
+                        for mcls in getmro(cls)
+                        if not mcls.__module__.startswith('builtins')
+                    ]
 
-        module_dotted = self.find_module()
-        if module_dotted:
-            module = import_module(module_dotted)
-            for name, data in self.classes.items():
-                cls = getattr(module, name)
-                fullname = cls.__module__ + '.' + cls.__name__
-                data['fullname'] = fullname
-
-                for parent_name in data['parents']:
-                    if parent_name in ['object', 'Exception', 'dict']:
-                        # data['fullparents'].append(parent_name)
-                        pass
-                    else:
-                        parent = getattr(module, parent_name)
-                        data['fullparents'].append(
-                            parent.__module__ + '.' + parent.__name__
-                        )
-        else:
-            print('No module:', self.filename)
+                    for parent_name in data['parents']:
+                        if parent_name in ['object', 'Exception', 'dict']:
+                            # data['fullparents'].append(parent_name)
+                            pass
+                        else:
+                            parent = getattr(module, parent_name)
+                            data['fullparents'].append(
+                                parent.__module__ + '.' + parent.__name__
+                            )
+                name = fullname or child
+                self.classes[name] = data
         return self.classes
 
 
@@ -119,11 +126,16 @@ class FindAllClasses(object):
 
 class GraphCreator(object):
 
-    def __init__(self):
+    def __init__(self, target_class=None):
         self.all_classes = {}
+        self.target_class = target_class
+        self._cache = []
 
     def run(self):
         self.search_for_classes()
+        if self.target_class:
+            self.mro = self.all_classes[self.target_class]['mro']
+            # self.mro.insert(0, self.target_class)
         self.generate_graph()
 
     def search_for_classes(self):
@@ -132,19 +144,42 @@ class GraphCreator(object):
                 Converter(filename).run()
             )
 
+    def get_classes(self):
+        if self.target_class:
+            yield from self._get_classes_with_parents(self.target_class)
+        else:
+            yield from self.all_classes.values()
+
+    def _get_classes_with_parents(self, target):
+        data = self.all_classes[target]
+        if id(data) not in self._cache:
+            self._cache.append(id(data))
+            yield data
+            for parent in data['fullparents']:
+                yield from self._get_classes_with_parents(parent)
+
     def generate_graph(self):
         with open('graph.dot', 'w') as file:
             file.write('digraph {\n')
 
             names = []
 
-            for child, data in self.all_classes.items():
-                names.append(
-                    ' "%s" [label="%s"];' % (
-                        data['fullname'],
-                        data['name'],
+            for data in self.get_classes():
+                if self.target_class:
+                    names.append(
+                        '  "%s" [label="%s (%d)"];' % (
+                            data['fullname'],
+                            data['name'],
+                            self.mro.index(data['fullname']),
+                        )
                     )
-                )
+                else:
+                    names.append(
+                        '  "%s" [label="%s"];' % (
+                            data['fullname'],
+                            data['name'],
+                        )
+                    )
                 for parent in data['fullparents']:
                     file.write(
                         '  "%s" -> "%s";\n' % (
@@ -158,7 +193,12 @@ class GraphCreator(object):
 
             file.write('}\n')
 
-GraphCreator().run()
+# GraphCreator('impex.orders.controllers.OrdersListController').run()
+GraphCreator('impex.orders.controllers.OrdersListControllerEx').run()
+
+# GraphCreator('implugin.test_beaker.ExampleBeakerApplication').run()
+# GraphCreator().run()
+
 # conv = Converter(
 #     '/home/socek/projects/impaf/example/src/impex/application/controller.py')
 # pprint(conv.run())
