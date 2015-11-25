@@ -194,7 +194,7 @@ class GraphCreator(object):
             file.write('}\n')
 
 # GraphCreator('impex.orders.controllers.OrdersListController').run()
-GraphCreator('impex.orders.controllers.OrdersListControllerEx').run()
+GraphCreator('impex.orders.controllersO.rdersListControllerEx').run()
 
 # GraphCreator('implugin.test_beaker.ExampleBeakerApplication').run()
 # GraphCreator().run()
